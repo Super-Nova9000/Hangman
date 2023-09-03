@@ -1,0 +1,76 @@
+var rnd = new Random();
+
+Console.WriteLine("Enter word: ");
+string word1 = Console.ReadLine();
+int word1len = word1.Length;
+//Asks the challenger to select the word to use
+
+
+
+int fails = 0; //Note: only allow 12 failed guesses
+string[] guesses = new string[word1len]; //previously guessed letters
+char[] guessMe = new char[word1len]; //store word progress
+
+for (int i = 0; i < word1len; i++)
+{
+    guessMe[i] = '_';
+}
+
+
+//establish a loop while the game is running
+bool gameOn = true;
+bool gameWon = false;
+while (gameOn == true)
+{
+    Console.Clear();
+    //Clears the console
+
+    int underscores = 0;
+    int letterHits = 0;
+
+    Console.WriteLine($"You have {12 - fails} fails remaining");
+    Console.WriteLine($"You have correctly guessed:{string.Join("", guessMe)}"); //Write contents of guessMe
+    Console.WriteLine("What is your next guess?");
+    char playerGuess = Console.ReadLine()[0];
+    for (int i = 0; i < word1len; i++)
+    {
+        if (playerGuess == word1[i] && gameWon == false)
+        {
+            guessMe[i] = playerGuess;
+            letterHits++;
+        }
+
+        if (guessMe[i] == '_') //Check for unguessed spaces
+        {
+            underscores++;
+        }
+    }
+
+    if (underscores <= 0)
+    {
+        gameWon = true; //End game if all spaces are guessed
+    }
+    else
+    {
+        gameWon = false; //Continue game if there are leftover spaces
+    }
+
+    if (letterHits <= 0)
+    {
+        fails++;
+    }
+
+    if (fails >= 12 || gameWon == true){
+        gameOn = false; 
+    } //Stops game if 12 fails are met or game is won
+
+} 
+
+
+
+if (gameOn == false && gameWon == true)
+{
+    Console.WriteLine("Congratulations! You won!");
+}
+else
+    Console.WriteLine($"You lost, the word was {word1}.");
