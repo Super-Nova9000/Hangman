@@ -13,7 +13,7 @@ char[] guessMe = new char[word1len]; //store word progress
 
 for (int i = 0; i < word1len; i++)
 {
-    guessMe[i] = '_';
+    guessMe[i] = '_'; //Set guessMe to be blank
 }
 
 
@@ -36,8 +36,8 @@ while (gameOn == true)
     {
         if (playerGuess == word1[i] && gameWon == false)
         {
-            guessMe[i] = playerGuess;
-            letterHits++;
+            guessMe[i] = playerGuess; //Set contents of guessMe
+            letterHits++; //Confirm that the guess was valid
         }
 
         if (guessMe[i] == '_') //Check for unguessed spaces
@@ -57,7 +57,7 @@ while (gameOn == true)
 
     if (letterHits <= 0)
     {
-        fails++;
+        fails++; //If the guess was invalid, add a fail
     }
 
     if (fails >= 12 || gameWon == true){
